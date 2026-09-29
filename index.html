@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Glowing Purple Pill Button</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+
+</head>
+<body class="min-h-screen flex items-center justify-center relative">
+
+    <canvas id="bg-canvas"></canvas>
+
+    <main class="flex items-center justify-center relative">
+        <!-- Light Flash Overlay Ring -->
+        <div id="flashOverlay" class="flash-overlay"></div>
+
+        <!-- Backdrop Glow Aura -->
+        <div id="glowAura" class="glow-aura"></div>
+
+        <!-- Button Wrapper -->
+        <div class="button-wrapper">
+            <button id="pillBtn" class="pill-button">
+                <!-- Shimmer highlight sweep overlay -->
+                <div class="shimmer-sweep"></div>
+
+                <!-- Inner Gradient Border Mask Ring -->
+                <div class="pill-button-border"></div>
+
+                <!-- Star / Sparkle SVG Icon -->
+                <svg class="sparkle-icon w-6 h-6" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 0L14.59 9.41L24 12L14.59 14.59L12 24L9.41 14.59L0 12L9.41 9.41L12 0Z"/>
+                </svg>
+
+                <!-- Button Text -->
+                <span class="relative z-10">Generate Site</span>
+            </button>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

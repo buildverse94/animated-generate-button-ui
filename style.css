@@ -1,0 +1,203 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700&display=swap');
+
+body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background: radial-gradient(circle at center, #13082b 0%, #090314 100%);
+    overflow: hidden;
+    user-select: none;
+    margin: 0;
+    padding: 0;
+}
+
+/* Ambient floating background canvas */
+#bg-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.button-wrapper {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* BACKDROP GLOW AURA */
+.glow-aura {
+    position: absolute;
+    width: 320px;
+    height: 120px;
+    border-radius: 9999px;
+    background: radial-gradient(circle, rgba(168, 85, 247, 0.8) 0%, rgba(126, 34, 206, 0.45) 45%, rgba(9, 3, 20, 0) 75%);
+    filter: blur(35px);
+    opacity: 1;
+    transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), filter 0.6s ease;
+    pointer-events: none;
+}
+
+.glow-aura.dimmed {
+    opacity: 0.05;
+    filter: blur(10px);
+    transform: scale(0.85);
+}
+
+.pill-button {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 18px 40px;
+    border-radius: 9999px;
+    background: linear-gradient(135deg, #a855f7 0%, #7e22ce 50%, #6b21a8 100%);
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 1.2rem;
+    letter-spacing: 0.01em;
+    cursor: pointer;
+    outline: none;
+    border: none;
+    box-shadow:
+        0 0 0 1.5px rgba(233, 213, 255, 0.6) inset,
+        0 4px 10px rgba(0, 0, 0, 0.5),
+        0 12px 32px rgba(126, 34, 206, 0.6),
+        0 0 45px rgba(168, 85, 247, 0.5);
+    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    overflow: hidden;
+}
+
+/* Inner glossy highlight top line */
+.pill-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 10%;
+    right: 10%;
+    height: 1.5px;
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.9) 50%, rgba(255, 255, 255, 0) 100%);
+    border-radius: 9999px;
+    opacity: 0.95;
+    transition: opacity 0.5s ease;
+}
+
+/* Shiny border mask ring */
+.pill-button-border {
+    position: absolute;
+    inset: 0;
+    border-radius: 9999px;
+    padding: 1.5px;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.7) 0%, rgba(168, 85, 247, 0.2) 60%, rgba(126, 34, 206, 0.9) 100%);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+    transition: opacity 0.5s ease;
+}
+
+/* Shimmer sweep effect on hover */
+.shimmer-sweep {
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg,
+            rgba(255, 255, 255, 0) 0%,
+            rgba(255, 255, 255, 0.03) 40%,
+            rgba(255, 255, 255, 0.35) 50%,
+            rgba(255, 255, 255, 0.03) 60%,
+            rgba(255, 255, 255, 0) 100%);
+    transform: translateX(-100%) rotate(25deg);
+    transition: transform 0.8s ease-in-out;
+    pointer-events: none;
+}
+
+.pill-button:hover .shimmer-sweep {
+    transform: translateX(100%) rotate(25deg);
+}
+
+/* Hover animation */
+.pill-button:hover:not(.dimmed) {
+    transform: translateY(-3px) scale(1.03);
+    box-shadow:
+        0 0 0 1.5px rgba(255, 255, 255, 0.8) inset,
+        0 6px 16px rgba(0, 0, 0, 0.6),
+        0 18px 42px rgba(126, 34, 206, 0.8),
+        0 0 60px rgba(192, 132, 252, 0.7);
+}
+
+.pill-button:active:not(.dimmed) {
+    transform: translateY(1px) scale(0.97);
+}
+
+/* DIMMED / OFF STATE */
+.pill-button.dimmed {
+    background: linear-gradient(135deg, #1d1728 0%, #120d1c 100%);
+    color: #5d546d;
+    box-shadow:
+        0 0 0 1px rgba(255, 255, 255, 0.05) inset,
+        0 2px 4px rgba(0, 0, 0, 0.6);
+}
+
+.pill-button.dimmed .sparkle-icon {
+    fill: #4b4358;
+    filter: none;
+}
+
+.pill-button.dimmed::before {
+    opacity: 0.1;
+}
+
+.pill-button.dimmed .pill-button-border {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.01) 100%);
+}
+
+.flash-overlay {
+    position: absolute;
+    inset: -60px;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.95) 0%, rgba(216, 180, 254, 0.7) 30%, rgba(168, 85, 247, 0) 70%);
+    opacity: 0;
+    pointer-events: none;
+    mix-blend-mode: overlay;
+    border-radius: 9999px;
+    transform: scale(0.5);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.flash-overlay.active {
+    animation: flashBurst 0.6s ease-out forwards;
+}
+
+@keyframes flashBurst {
+    0% {
+        opacity: 1;
+        transform: scale(0.6);
+    }
+
+    50% {
+        opacity: 0.8;
+        transform: scale(1.4);
+    }
+
+    100% {
+        opacity: 0;
+        transform: scale(2.2);
+    }
+}
+
+/* SPARKLE ICON */
+.sparkle-icon {
+    fill: #ffffff;
+    filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.9));
+    transition: all 0.5s ease;
+}
+
+.pill-button:hover:not(.dimmed) .sparkle-icon {
+    transform: rotate(180deg) scale(1.2);
+}
